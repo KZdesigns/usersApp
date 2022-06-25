@@ -4,27 +4,18 @@ import UserForm from "./UserForm/UserForm";
 import UserList from "./UserList/UserList";
 
 function App() {
-  const USERS_DATA = [
-    {
-      name: "Kyle Zimmerman",
-      age: 28,
-    },
-    {
-      name: "Lauriane",
-      age: 23,
-    },
-  ];
-
+  const USERS_DATA = [];
   const [Users, setUser] = useState(USERS_DATA);
 
-  //TODO:
-  // need to add an addUsers method and pass the method via props to UserForm call setUser in this method
-  // need to pass Users data to the userList component via props
+  const addUser = (userData) => {
+    let users = [userData, ...Users];
+    setUser(users);
+  };
 
   return (
     <div className="container-sm">
-      <UserForm />
-      <UserList />
+      <UserForm addUser={addUser} />
+      <UserList usersData={Users} />
     </div>
   );
 }
